@@ -1,0 +1,8 @@
+<h1>Check Player Details</h1>
+<%= form_with url: player_details_path, method: :post do |f| %>
+  <div class="form-group">
+    <%= f.label :player_name, "Player Name" %>
+    <%= f.text_field :player_name, class: "form-control" %>
+  </div>
+  <%= f.submit "Check Player Details", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,37 @@
+<h1>Pages#home</h1>
+<p>Find me in app/views/pages/home.html.erb</p>
+<% if current_user %>
+  <h3>Hi <%= current_user.player_name.capitalize %></h3>
+  <%= link_to "Edit Profile", edit_user_registration_path %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "Login", new_user_session_path %>
+  <%= link_to "Sign Up", new_user_registration_path %>
+<% end %>
+<%= form_with url: player_details_path, method: :post do |f| %>
+  <div class="form-group">
+    <%= f.label :player_name, "Player Name" %>
+    <%= f.text_field :player_name, class: "form-control" %>
+  </div>
+  <%= f.submit "Check Player Details", class: "btn btn-primary" %>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Rank</th>
+      <th>Level</th>
+      <th>Experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% player_data&.each do |data| %>
+      <tr>
+        <td><%= skill_name_by_id(data[:skill_id]) %></td>
+        <td><%= data[:rank] %></td>
+        <td><%= data[:level] %></td>
+        <td><%= data[:experience] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
